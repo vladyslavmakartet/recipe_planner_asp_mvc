@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipe_planner_web", "recipe_planner_web\recipe_planner_web.csproj", "{15BB23DF-D4C9-466D-B2A0-91F15E5AB696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15BB23DF-D4C9-466D-B2A0-91F15E5AB696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BB23DF-D4C9-466D-B2A0-91F15E5AB696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BB23DF-D4C9-466D-B2A0-91F15E5AB696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BB23DF-D4C9-466D-B2A0-91F15E5AB696}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {703C6480-F4B2-4966-8260-3D213E53FF9C}
+	EndGlobalSection
+EndGlobal
