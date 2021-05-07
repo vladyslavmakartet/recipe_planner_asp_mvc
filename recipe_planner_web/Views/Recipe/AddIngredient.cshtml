@@ -1,0 +1,138 @@
+﻿@model recipe_planner_web.Models.Recipe
+
+@{
+    ViewData["Title"] = "Add Ingredient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ingredientsList = ViewData["Ingredients"] as List<Ingredient>;
+}
+
+<h1>Add ingredients</h1>
+@*<h4>Recipe</h4>*@
+<hr />
+
+<div class="container">
+    @using (Html.BeginForm("CreateIngredient", "Recipe"))
+    {
+        <div class="container text-center">
+            <div class="row  text-center">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input type="text" name="ingredientName" class="form-control" placeholder="Ingredient's name" required>
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label">Quantity</label>
+                        <input type="number" min="0.01" step="0.01" name="ingredientQuantity" class="form-control" placeholder="Ingredient's quantity" required>
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label">Unit</label>
+                        <input type="text" name="ingredientUnit" class="form-control" placeholder="Ingredient's unit" required>
+
+                    </div>
+                </div>
+                <!--<div class="col ">
+                    <label class="control-label">Action</label>
+                    <div class="form-group">-->
+                @*                        <div class="btn-group" role="group" aria-label="Basic example">*@
+                @*                            <button type="submit" class="btn btn-primary btn-sm" name="valueToAdd">Add</button>*@
+                <!--<button type="submit" class="btn btn-danger  btn-block " name="valueToRemove">Remove</button>
+                    </div>
+                </div>-->
+            </div>
+            @*            </div>*@
+            @*<a class="btn btn-primary  text-center btn-block" href="@Url.Action("AddIngredient","Recipe")">Add ingredient</a>*@
+            <input type="submit" value="Add" class="btn btn-primary  text-center btn-block" />
+
+        </div>
+    }
+    
+    <br>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-center">Unit</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (ingredientsList.Count() != 0)
+                    {
+                        @*                        foreach (var item in ingredientsList)
+                {
+                    <tr class="text-center">
+                        <th class="text-center" scope="row"></th>
+                        <td>@item.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Unit</td>
+                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+                    </tr>
+                }*@
+
+                        for (int i = 0; i < ingredientsList.Count; i++)
+                        {
+                            <tr class="text-center">
+                                <th class="text-center" scope="row">@(i+1)</th>
+                                <td>@ingredientsList[i].Name</td>
+                                <td>@ingredientsList[i].Quantity</td>
+                                <td>@ingredientsList[i].Unit</td>
+                                @using (Html.BeginForm("DeleteIngredientFromList", "Recipe"))
+                                {
+                                    <td align="center"><button type="submit" class="btn btn-danger text-center" name="valueToDelete" value="@i">Remove</button></td>
+                                }
+                            </tr>
+                        }
+
+
+
+
+
+                    }
+
+                }
+                @*<tr class="text-center">
+            <th class="text-center" scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>mdo</td>
+            <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+        </tr>
+        <tr class="text-center">
+            <th class="text-center" scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>fat</td>
+            <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+        </tr>
+        <tr class="text-center">
+            <th class="text-center" scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>twitter</td>
+            <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+        </tr>*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    <br />
+    <div>
+        <a asp-action="Create">Back</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -4,5 +4,10 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!--<button asp-area="" asp-controller="Recipe" asp-action="Create" type="button" class="btn btn-primary btn-lg text-center">Create Recipe</button>-->
+
+
+    <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Create Recipe</a>
+    <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Load Recipes</a>
+
 </div>
