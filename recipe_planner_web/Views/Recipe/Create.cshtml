@@ -10,9 +10,7 @@
 
 }
 
-<h1>Create Recipe</h1>
-@*<h4>Recipe</h4>*@
-<hr />
+
 <!--using (Html.BeginForm("SelectEditType", "Recipe"))
 {-->
 @*    <div class="container">
@@ -39,6 +37,9 @@
 
 <!--}-->
 <div class="container">
+    <h1>Create Recipe</h1>
+    @*<h4>Recipe</h4>*@
+    <hr />
     @using (Html.BeginForm("CreateRecipe", "Recipe"))
     {
         //<form asp-action="Create" class="was-validated">
@@ -187,7 +188,7 @@
             </thead>
             <tbody>
                 @{
-                    if (ingredientsList.Count() != 0)
+                    if (ingredientsList.Count != 0)
                     {
 
 

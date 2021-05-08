@@ -1,0 +1,117 @@
+﻿@model recipe_planner_web.Models.Recipe
+
+@{
+    ViewData["Title"] = "Edit Recipe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var RecipeToEdit = Convert.ToInt32(ViewData["RecipeToEdit"]);
+    var RecipesList = ViewData["RecipesList"] as List<Recipe>;
+
+
+}
+<div class="container">
+    <h1>Edit Recipe</h1>
+    <hr />
+    @using (Html.BeginForm("EditNameAndDescription", "Recipe")) 
+    {
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            @{
+                if (!String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_name))
+                {
+                    <input name="Name" class="form-control" placeholder="Recipe's name" value="@RecipesList[RecipeToEdit].recipe_name" required />
+                }
+                else
+                {
+                    <input name="Name" class="form-control" placeholder="Recipe's name" required />
+                }
+            }
+
+
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Description</label>
+            @{
+                if (!String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_description))
+                {
+                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" required>@RecipesList[RecipeToEdit].recipe_description</textarea>
+                }
+                else
+                {
+                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" required></textarea>
+                }
+            }
+
+
+        </div>
+        
+
+        <div class="row text-center justify-content-md-center">
+            <div class="col">
+                <input id="new-board-btn" type="submit" value="Save" class="btn btn-primary text-center btn-lg w-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save Name&Description" />
+            </div>
+            <div class="col">
+                <a id="new-board-btn" class="btn btn-primary btn-lg text-center w-100" href="@Url.Action("EditIngredients", "Recipe")">Add/Modify ingredients</a>
+            </div>
+            <div class="col">
+                @{
+                    if (String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_description) || String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_name) || !RecipesList[RecipeToEdit].ingredientsList.Any())
+                    {
+                        <button id="new-board-btn" type="button" class="btn btn-primary text-center btn-lg w-100 disabled"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please fill all fields and add ingredients">
+                            Create Recipe
+                        </button>
+
+                    }
+                    else
+                    {
+                        <a asp-controller="Recipe" asp-action="BackToList" id="new-board-btn" type="button" class="btn btn-primary text-center btn-lg w-100">End edition</a>
+                    }
+                }
+            </div>
+
+        </div>
+
+
+        <br />
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-center">Unit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (RecipesList[RecipeToEdit].ingredientsList.Count != 0)
+                    {
+
+
+
+                        for (int i = 0; i < RecipesList[RecipeToEdit].ingredientsList.Count; i++)
+                        {
+                            <tr class="text-center">
+                                <th class="text-center" scope="row">@(i+1)</th>
+                                <td>@RecipesList[RecipeToEdit].ingredientsList[i].Name</td>
+                                <td>@RecipesList[RecipeToEdit].ingredientsList[i].Quantity</td>
+                                <td>@RecipesList[RecipeToEdit].ingredientsList[i].Unit</td>
+                            </tr>
+                        }
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    }
+
+    <br />
+    <div>
+        <a asp-controller="Recipe" asp-action="BackToList">Back to List</a>
+    </div>
+</div>
