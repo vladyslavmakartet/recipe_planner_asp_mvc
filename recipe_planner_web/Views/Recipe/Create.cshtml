@@ -1,16 +1,21 @@
 ﻿@model recipe_planner_web.Models.Recipe
 
 @{
-    ViewData["Title"] = "Name&Description";
+    ViewData["Title"] = "Create Recipe";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ingredientsList = ViewData["Ingredients"] as List<Ingredient>;
+    var recipeName = ViewData["RecipeName"] as string;
+    var recipeDescription = ViewData["RecipeDescription"] as string;
+
+
 }
 
-<h1>Create</h1>
-<h4>Recipe</h4>
+<h1>Create Recipe</h1>
+@*<h4>Recipe</h4>*@
 <hr />
-@using (Html.BeginForm("SelectEditType", "Recipe"))
-{
-    <div class="container">
+<!--using (Html.BeginForm("SelectEditType", "Recipe"))
+{-->
+@*    <div class="container">
         <div class="row justify-content-center">
             <div class="btn-group btn-group-lg d-flex" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary w-100">Name&Description</button>
@@ -18,7 +23,7 @@
                 <button type="button" class="btn btn-secondary w-100">Summary</button>
             </div>
         </div>
-    </div>
+    </div>*@
 
 
 @*    <div class="container">
@@ -32,7 +37,7 @@
 
 
 
-}
+<!--}-->
 <div class="container">
     @using (Html.BeginForm("CreateRecipe", "Recipe"))
     {
@@ -40,14 +45,34 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="recipe_name" class="control-label">Name</label>
-            <input asp-for="recipe_name" name="Name" class="form-control" placeholder="Recipe's name" id="customControlValidation1" required />
-            <span asp-validation-for="recipe_name" class="text-danger"></span>
+            @{
+                if (!String.IsNullOrEmpty(recipeName))
+                {
+                    <input name="Name" class="form-control" placeholder="Recipe's name" value="@recipeName" required />
+                }
+                else
+                {
+                    <input name="Name" class="form-control" placeholder="Recipe's name" required />
+                }
+            }
+
+
         </div>
 
         <div class="form-group">
             <label asp-for="recipe_description" class="control-label">Description</label>
-            <textarea asp-for="recipe_description" name="Description" class="form-control" placeholder="Recipe's description" required></textarea>
-            <span asp-validation-for="recipe_description" class="text-danger"></span>
+            @{
+                if (!String.IsNullOrEmpty(recipeDescription))
+                {
+                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" required>@recipeDescription</textarea>
+                }
+                else
+                {
+                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" required></textarea>
+                }
+            }
+
+
         </div>
         @*<label asp-for="ingredients" class="control-label">Ingredients</label>*@
         @*        <div class="input-group">
@@ -99,11 +124,109 @@
             </div>
         </div>-->
         @*            </div>*@
-        <!--//<a class="btn btn-primary  text-center btn-block" href="@Url.Action("AddIngredient","Recipe")">Add ingredient</a>
+        <!--//<a class="btn btn-primary  text-center btn-block" href="Url.Action("AddIngredient","Recipe")">Add ingredient</a>
             <input type="submit" value="Create" class="btn btn-primary  text-center btn-block"/>
 
         }-->
-        <a class="btn btn-primary btn-lg text-center btn-block" href="@Url.Action("AddIngredient","Recipe")">Add ingredient</a>
+        //<input type="submit" value="Save" class="btn btn-primary  text-center btn-block" />
+        //<a class="btn btn-primary btn-lg text-center btn-block" href="@Url.Action("AddIngredient","Recipe")">Add ingredient</a>
+
+
+        <!--<div class="container">
+            <div class="row justify-content-center">
+                <div class="btn-group btn-group-lg d-flex" role="group" aria-label="Buttons">-->
+        @*                        <button type="button" class="btn btn-secondary w-100">Name&Description</button>
+            <button type="button" class="btn btn-secondary w-100">Ingredients</button>
+            <button type="button" class="btn btn-secondary w-100">Summary</button>*@
+        <!--<input type="submit" value="Save" class="btn btn-primary  text-center btn-block" />
+                    <a class="btn btn-primary btn-lg text-center btn-primary" href="Url.Action("AddIngredient","Recipe")">Add ingredient</a>
+                    <button type="button" class="btn btn-secondary w-100">Create Recipe</button>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="row text-center justify-content-md-center">
+            <div class="col">
+                <input id="new-board-btn" type="submit" value="Save" class="btn btn-primary text-center btn-lg w-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save Name&Description" />
+            </div>
+            <div class="col">
+                <a id="new-board-btn" class="btn btn-primary btn-lg text-center w-100" href="@Url.Action("AddIngredient", "Recipe")">Add/Modify ingredients</a>
+            </div>
+            <div class="col">
+                @{
+                    if (String.IsNullOrEmpty(recipeDescription) || String.IsNullOrEmpty(recipeName) || !ingredientsList.Any())
+                    {
+                        <button id="new-board-btn" type="button" class="btn btn-primary text-center btn-lg w-100 disabled"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please fill all fields and add ingredients">
+                            Create Recipe
+                        </button>
+
+                    }
+                    else
+                    {
+                        <a asp-controller="Recipe" asp-action="Summary" id="new-board-btn" type="button" class="btn btn-primary text-center btn-lg w-100">Create Recipe</a>
+                    }
+                }
+            </div>
+
+        </div>
+
+
+        <br />
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-center">Unit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (ingredientsList.Count() != 0)
+                    {
+
+
+
+                        for (int i = 0; i < ingredientsList.Count; i++)
+                        {
+                            <tr class="text-center">
+                                <th class="text-center" scope="row">@(i+1)</th>
+                                <td>@ingredientsList[i].Name</td>
+                                <td>@ingredientsList[i].Quantity</td>
+                                <td>@ingredientsList[i].Unit</td>
+                            </tr>
+                        }
+                    }
+
+                }
+
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -123,12 +246,9 @@
 
 
     }
-</div>
-<br />
-<div>
-    <a asp-controller="Recipe" asp-action="BackToList">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <br />
+    <div>
+        <a asp-controller="Recipe" asp-action="BackToList">Back to List</a>
+    </div>
+</div>

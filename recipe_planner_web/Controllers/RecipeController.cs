@@ -9,8 +9,10 @@ namespace recipe_planner_web.Controllers
 {
     public class RecipeController : Controller
     {
-        Recipe newRecipe = new Recipe();
+
+        static Recipe newRecipe = new Recipe();
         static List<Ingredient> ingredientsToAdd = new List<Ingredient>();
+        static List<Recipe> RecipesList = new List<Recipe>();
 
         public IActionResult Index()
         {
@@ -19,6 +21,11 @@ namespace recipe_planner_web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["Ingredients"] = ingredientsToAdd;
+            if (!String.IsNullOrEmpty(newRecipe.recipe_name))
+                ViewData["RecipeName"] = newRecipe.recipe_name;
+            if (!String.IsNullOrEmpty(newRecipe.recipe_description))
+                ViewData["RecipeDescription"] = newRecipe.recipe_description;
             return View();
         }
         [HttpGet]
@@ -28,51 +35,28 @@ namespace recipe_planner_web.Controllers
             return View();
         }
         [HttpPost]
-        public Recipe CreateRecipe()
+        public IActionResult CreateRecipe()
         {
-
-            Recipe newRecipe = new Recipe();
             newRecipe.recipe_name = Request.Form["Name"].ToString();
             newRecipe.recipe_description = Request.Form["Description"].ToString();
-            //newRecipe.ingredients = new List<Ingredient>();
-            Ingredient newIngredient = TempData["IngredientToAdd"] as Ingredient;
-            newRecipe.ingredientsList.Add(newIngredient);
-
-
-            return newRecipe;
+            return RedirectToAction("Create", "Recipe");
         }
         
         public IActionResult CreateIngredient()
         {
             Ingredient newIngredient = new Ingredient(Request.Form["ingredientName"].ToString(), Convert.ToSingle(Request.Form["ingredientQuantity"]), Request.Form["ingredientUnit"].ToString());
-            //TempData["IngredientToAdd"] = newIngredient;
             if (!ingredientsToAdd.Any())
-            {
                 ingredientsToAdd.Add(newIngredient);
-            }
             else
             {
                 bool sameItem = false;
                 foreach (var item in ingredientsToAdd.ToList())
-                {
                     if (item.Name == newIngredient.Name && item.Unit == newIngredient.Unit)
-                    {
                         sameItem = true;
-                    }
-                }
+
                 if (!sameItem)
-                {
                     ingredientsToAdd.Add(newIngredient);
-                }
             }
-
-
-
-            /*            if (!ingredientsToAdd.Contains(newIngredient))
-                        {
-                            ingredientsToAdd.Add(newIngredient);
-                        }*/
-            //return View("Views/Recipe/AddIngredient.cshtml");//RedirectToAction("AddIngredientToList", "Recipe");
            return RedirectToAction("AddIngredient", "Recipe");
 
         }
@@ -86,9 +70,26 @@ namespace recipe_planner_web.Controllers
         public IActionResult BackToList()
         {
             ingredientsToAdd.Clear();
+            newRecipe.recipe_name = null;
+            newRecipe.recipe_description = null;
             return View("Views/Recipe/Index.cshtml");
         }
 
+        public IActionResult Summary()
+        {
+            ViewData["Ingredients"] = ingredientsToAdd;
+            if (!String.IsNullOrEmpty(newRecipe.recipe_name))
+                ViewData["RecipeName"] = newRecipe.recipe_name;
+            if (!String.IsNullOrEmpty(newRecipe.recipe_description))
+                ViewData["RecipeDescription"] = newRecipe.recipe_description;
 
+            return View();
+        }
+
+        public IActionResult AddRecipeToList()
+        {
+            RecipesList.Add(newRecipe);
+            return RedirectToAction("BackToList", "Recipe");
+        }
     }
 }

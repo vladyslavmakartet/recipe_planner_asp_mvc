@@ -1,0 +1,96 @@
+﻿@model recipe_planner_web.Models.Recipe
+
+@{
+    ViewData["Title"] = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ingredientsList = ViewData["Ingredients"] as List<Ingredient>;
+    var recipeName = ViewData["RecipeName"] as string;
+    var recipeDescription = ViewData["RecipeDescription"] as string;
+}
+
+<h1>Summary</h1>
+<hr />
+
+<div class="container">
+    <div class="form-group">
+        <label asp-for="recipe_name" class="control-label">Name</label>
+        @{
+            if (!String.IsNullOrEmpty(recipeName))
+            {
+                <input name="Name" class="form-control" placeholder="Recipe's name" value="@recipeName" readonly />
+            }
+
+        }
+        <br />
+        <div class="form-group">
+            <label asp-for="recipe_description" class="control-label">Description</label>
+            @{
+                if (!String.IsNullOrEmpty(recipeDescription))
+                {
+                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" readonly>@recipeDescription</textarea>
+                }
+            }
+
+
+
+
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-center">Unit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (ingredientsList.Count() != 0)
+                    {
+
+
+
+                        for (int i = 0; i < ingredientsList.Count; i++)
+                        {
+                            <tr class="text-center">
+                                <th class="text-center" scope="row">@(i+1)</th>
+                                <td>@ingredientsList[i].Name</td>
+                                <td>@ingredientsList[i].Quantity</td>
+                                <td>@ingredientsList[i].Unit</td>
+                            </tr>
+                        }
+                    }
+
+                }
+
+            </tbody>
+        </table>
+        <hr />
+
+
+        <div class="row justify-content-center">
+            <div class="btn-group btn-group-lg d-flex btn-block" role="group" aria-label="Basic example">
+                <a asp-controller="Recipe" asp-action="BackToList" class="btn btn-danger w-100">Cancel</a>
+                <a asp-controller="Recipe" asp-action="AddRecipeToList" class="btn btn-primary w-100">Create</a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <br />
+    </div>
+
+
+
+
+    <div>
+        <a asp-action="Create">Back</a>
+    </div>
+</div>

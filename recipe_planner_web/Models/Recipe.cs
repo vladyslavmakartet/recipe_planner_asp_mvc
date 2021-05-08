@@ -7,8 +7,14 @@ namespace recipe_planner_web.Models
 {
     public class Recipe
     {
+
         public string recipe_name { get; set; }
         public string recipe_description { get; set; }
+/*        public static Recipe RecipeInstance = new Recipe();
+        public void Reset()
+        {
+            RecipeInstance = new Recipe();
+        }*/
 
         public List<Ingredient> ingredientsList = new List<Ingredient>();
 

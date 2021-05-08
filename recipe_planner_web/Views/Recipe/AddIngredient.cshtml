@@ -1,7 +1,7 @@
 ﻿@model recipe_planner_web.Models.Recipe
 
 @{
-    ViewData["Title"] = "Add Ingredient";
+    ViewData["Title"] = "Add Ingredients";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var ingredientsList = ViewData["Ingredients"] as List<Ingredient>;
 }
@@ -52,7 +52,7 @@
 
         </div>
     }
-    
+
     <br>
     <div class="container">
         <table class="table">
@@ -70,15 +70,15 @@
                     if (ingredientsList.Count() != 0)
                     {
                         @*                        foreach (var item in ingredientsList)
-                {
-                    <tr class="text-center">
-                        <th class="text-center" scope="row"></th>
-                        <td>@item.Name</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.Unit</td>
-                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-                    </tr>
-                }*@
+                            {
+                                <tr class="text-center">
+                                    <th class="text-center" scope="row"></th>
+                                    <td>@item.Name</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Unit</td>
+                                    <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+                                </tr>
+                            }*@
 
                         for (int i = 0; i < ingredientsList.Count; i++)
                         {
@@ -102,30 +102,30 @@
 
                 }
                 @*<tr class="text-center">
-            <th class="text-center" scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-            <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-        </tr>
-        <tr class="text-center">
-            <th class="text-center" scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-            <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-        </tr>
-        <tr class="text-center">
-            <th class="text-center" scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>twitter</td>
-            <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-        </tr>*@
+                        <th class="text-center" scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+                    </tr>
+                    <tr class="text-center">
+                        <th class="text-center" scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>fat</td>
+                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+                    </tr>
+                    <tr class="text-center">
+                        <th class="text-center" scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>twitter</td>
+                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
+                    </tr>*@
             </tbody>
         </table>
     </div>
-</div>
+
 
 
     <br />
@@ -133,6 +133,4 @@
         <a asp-action="Create">Back</a>
     </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+</div>
