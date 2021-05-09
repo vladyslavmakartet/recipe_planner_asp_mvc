@@ -28,7 +28,11 @@ namespace recipe_planner_web.Models
         {
             recipe_name = name;
             recipe_description = description;
-            ingredientsList = newIngredients;
+
+            for (int i = 0; i < newIngredients.Count; i++)
+            {
+                ingredientsList.Add(new Ingredient(newIngredients[i].Name, newIngredients[i].Quantity, newIngredients[i].Unit));
+            }
         }
         
 

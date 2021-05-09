@@ -1,13 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="wrapper">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <!--<button asp-area="" asp-controller="Recipe" asp-action="Create" type="button" class="btn btn-primary btn-lg text-center">Create Recipe</button>-->
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <!--<button asp-area="" asp-controller="Recipe" asp-action="Create" type="button" class="btn btn-primary btn-lg text-center">Create Recipe</button>-->
 
+        <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Create Recipe</a>
+        <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Load Recipes</a>
 
-    <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Create Recipe</a>
-    <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Load Recipes</a>
-
+    </div>
 </div>

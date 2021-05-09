@@ -4,13 +4,14 @@
     ViewData["Title"] = "Edit Ingredients";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var ingredientsList = ViewData["IngredientsToEdit"] as List<Ingredient>;
+    var ID = ViewData["ID"];
 }
 
 
 <div class="container">
     <h1>Edit ingredients</h1>
     <hr />
-    @using (Html.BeginForm("EditIngredient", "Recipe"))
+    @using (Html.BeginForm("EditIngredient", "Recipe", new { id = @ID }))
     {
         <div class="text-center">
             <div class="row  text-center">
@@ -65,7 +66,7 @@
                             <td>@ingredientsList[i].Name</td>
                             <td>@ingredientsList[i].Quantity</td>
                             <td>@ingredientsList[i].Unit</td>
-                            @using (Html.BeginForm("EditDeleteIngredientFromList", "Recipe"))
+                            @using (Html.BeginForm("EditDeleteIngredientFromList", "Recipe", new { id = @ID }))
                             {
                                 <td align="center">
                                     <button type="submit" class="btn btn-danger text-center" name="valueToDelete" value="@i">
@@ -85,7 +86,7 @@
 
     <br />
     <div>
-        <a asp-controller="Recipe" asp-action="Edit">Back</a>
+        <a href="@Url.Action("Edit","Recipe", new { Id = @ID })">Back</a>
     </div>
 
 </div>

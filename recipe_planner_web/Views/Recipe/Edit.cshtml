@@ -3,22 +3,23 @@
 @{
     ViewData["Title"] = "Edit Recipe";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var RecipeToEdit = Convert.ToInt32(ViewData["RecipeToEdit"]);
+    var RecipeToModify = Convert.ToInt32(ViewData["RecipeToEdit"]);
     var RecipesList = ViewData["RecipesList"] as List<Recipe>;
 
 
 }
+
 <div class="container">
     <h1>Edit Recipe</h1>
     <hr />
-    @using (Html.BeginForm("EditNameAndDescription", "Recipe")) 
+    @using (Html.BeginForm("EditNameAndDescription", "Recipe", new { id = @RecipeToModify }))
     {
         <div class="form-group">
             <label class="control-label">Name</label>
             @{
-                if (!String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_name))
+                if (!String.IsNullOrEmpty(RecipesList[RecipeToModify].recipe_name))
                 {
-                    <input name="Name" class="form-control" placeholder="Recipe's name" value="@RecipesList[RecipeToEdit].recipe_name" required />
+                    <input name="Name" class="form-control" placeholder="Recipe's name" value="@RecipesList[RecipeToModify].recipe_name" required />
                 }
                 else
                 {
@@ -32,9 +33,9 @@
         <div class="form-group">
             <label class="control-label">Description</label>
             @{
-                if (!String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_description))
+                if (!String.IsNullOrEmpty(RecipesList[RecipeToModify].recipe_description))
                 {
-                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" required>@RecipesList[RecipeToEdit].recipe_description</textarea>
+                    <textarea id="myTextArea" name="Description" class="form-control" placeholder="Recipe's description" required>@RecipesList[RecipeToModify].recipe_description</textarea>
                 }
                 else
                 {
@@ -44,18 +45,21 @@
 
 
         </div>
-        
+     
 
         <div class="row text-center justify-content-md-center">
             <div class="col">
-                <input id="new-board-btn" type="submit" value="Save" class="btn btn-primary text-center btn-lg w-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save Name&Description" />
+                <input id="new-board-btn"  type="submit" value="Save" class="btn btn-primary text-center btn-lg w-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save Name&Description" />
             </div>
+
             <div class="col">
-                <a id="new-board-btn" class="btn btn-primary btn-lg text-center w-100" href="@Url.Action("EditIngredients", "Recipe")">Add/Modify ingredients</a>
-            </div>
+
+                    <a id="new-board-btn" class="btn btn-primary btn-lg text-center w-100" href=@Url.Action("EditIngredients", "Recipe", new { Id = @RecipeToModify })>Add/Modify ingredients</a>
+                    
+                </div>
             <div class="col">
                 @{
-                    if (String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_description) || String.IsNullOrEmpty(RecipesList[RecipeToEdit].recipe_name) || !RecipesList[RecipeToEdit].ingredientsList.Any())
+                    if (String.IsNullOrEmpty(RecipesList[RecipeToModify].recipe_description) || String.IsNullOrEmpty(RecipesList[RecipeToModify].recipe_name) || !RecipesList[RecipeToModify].ingredientsList.Any())
                     {
                         <button id="new-board-btn" type="button" class="btn btn-primary text-center btn-lg w-100 disabled"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please fill all fields and add ingredients">
@@ -71,7 +75,7 @@
             </div>
 
         </div>
-
+    }
 
         <br />
 
@@ -88,18 +92,18 @@
             </thead>
             <tbody>
                 @{
-                    if (RecipesList[RecipeToEdit].ingredientsList.Count != 0)
+                    if (RecipesList[RecipeToModify].ingredientsList.Count != 0)
                     {
 
 
 
-                        for (int i = 0; i < RecipesList[RecipeToEdit].ingredientsList.Count; i++)
+                        for (int i = 0; i < RecipesList[RecipeToModify].ingredientsList.Count; i++)
                         {
                             <tr class="text-center">
                                 <th class="text-center" scope="row">@(i+1)</th>
-                                <td>@RecipesList[RecipeToEdit].ingredientsList[i].Name</td>
-                                <td>@RecipesList[RecipeToEdit].ingredientsList[i].Quantity</td>
-                                <td>@RecipesList[RecipeToEdit].ingredientsList[i].Unit</td>
+                                <td>@RecipesList[RecipeToModify].ingredientsList[i].Name</td>
+                                <td>@RecipesList[RecipeToModify].ingredientsList[i].Quantity</td>
+                                <td>@RecipesList[RecipeToModify].ingredientsList[i].Unit</td>
                             </tr>
                         }
                     }
@@ -108,7 +112,7 @@
 
             </tbody>
         </table>
-    }
+
 
     <br />
     <div>
