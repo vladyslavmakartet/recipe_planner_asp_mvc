@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "About";
 }
+
+<div class="container">
+    <div class="text-center">
+
+        @Html.Raw(System.IO.File.ReadAllText("wwwroot/pic.svg"))
+        <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class=" text-justify">
+                <h1 class="title text-left">Recipe Planner</h1>
+                <p><b>Recipe Planner</b> - is a web application written with the help of the ASP.NET MVC web application framework on C#. </p>
+                <p>With this web app, you can create recipes and perform calculations of each ingredient you need to buy to cook a meal (available in the Shopping list section). </p>
+                <p>The program allows to view and edit each recipe created as well as ingredients belonging to a certain recipe.</p>
+                <p>Additionally, it is possible to load and save created recipes locally (on the server) and externally (on the client-side).</p>
+                <p>The web application is one of the assignments for the EGUI course at Warsaw University of Technology.</p>
+                <h1 class="title text-left">Tools used</h1>
+                <ul class="list">
+                    <li>Microsoft Visual Studio Community 2019 Version 16.9.4</li>
+                    <li>Microsoft .NET Framework Version 4.8.04084</li>
+                    <li>Microsoft ASP.NET Core 5.0</li>
+                    <li>Bootstrap 5</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+        </div>
+    </div>

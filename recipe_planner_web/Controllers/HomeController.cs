@@ -23,7 +23,7 @@ namespace recipe_planner_web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }

@@ -10,39 +10,13 @@
 
 }
 
-
-<!--using (Html.BeginForm("SelectEditType", "Recipe"))
-{-->
-@*    <div class="container">
-        <div class="row justify-content-center">
-            <div class="btn-group btn-group-lg d-flex" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary w-100">Name&Description</button>
-                <button type="button" class="btn btn-secondary w-100">Ingredients</button>
-                <button type="button" class="btn btn-secondary w-100">Summary</button>
-            </div>
-        </div>
-    </div>*@
-
-
-@*    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md">Name&Description</div>
-            <div class="col-md">Ingredients</div>
-            <div class="col-md">Summary</div>
-        </div>
-    </div>*@
-
-
-
-
-<!--}-->
 <div class="container">
     <h1>Create Recipe</h1>
     @*<h4>Recipe</h4>*@
     <hr />
     @using (Html.BeginForm("CreateRecipe", "Recipe"))
     {
-        //<form asp-action="Create" class="was-validated">
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Name" class="control-label">Name</label>
@@ -75,77 +49,6 @@
 
 
         </div>
-        @*<label asp-for="ingredients" class="control-label">Ingredients</label>*@
-        @*        <div class="input-group">
-                <input asp-for="ingredients" type="text" name="ingredientName" class="form-control" placeholder="Ingredient's name" required>
-                <input asp-for="ingredients" type="number" min="0.01" step="0.01" name="ingredientQuantity" class="form-control" placeholder="Ingredient's quantity" required>
-                <input asp-for="ingredients" type="text" name="ingredientUnit" class="form-control" placeholder="Ingredient's unit" required>
-            </div>*@
-
-
-
-
-
-
-
-
-        @*         using (Html.BeginForm("AddIngredient", "Recipe"))
-            {*@
-        <!--//<div class="container text-center">
-        <div class="row  text-center">
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="ingredients" class="control-label">Name</label>
-                    <input asp-for="ingredients" type="text" name="ingredientName" class="form-control" placeholder="Ingredient's name" required>
-                    <span asp-validation-for="ingredients" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="ingredients" class="control-label">Quantity</label>
-                    <input asp-for="ingredients" type="number" min="0.01" step="0.01" name="ingredientQuantity" class="form-control" placeholder="Ingredient's quantity" required>
-                    <span asp-validation-for="ingredients" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="form-group">
-                    <label asp-for="ingredients" class="control-label">Unit</label>
-                    <input asp-for="ingredients" type="text" name="ingredientUnit" class="form-control" placeholder="Ingredient's unit" required>
-                    <span asp-validation-for="ingredients" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col ">
-                <label class="control-label">Action</label>
-                <div class="form-group">-->
-        @*                        <div class="btn-group" role="group" aria-label="Basic example">*@
-        @*                            <button type="submit" class="btn btn-primary btn-sm" name="valueToAdd">Add</button>*@
-        <!--<button type="submit" class="btn btn-danger  btn-block " name="valueToRemove">Remove</button>
-                </div>
-            </div>
-        </div>-->
-        @*            </div>*@
-        <!--//<a class="btn btn-primary  text-center btn-block" href="Url.Action("AddIngredient","Recipe")">Add ingredient</a>
-            <input type="submit" value="Create" class="btn btn-primary  text-center btn-block"/>
-
-        }-->
-        //<input type="submit" value="Save" class="btn btn-primary  text-center btn-block" />
-        //<a class="btn btn-primary btn-lg text-center btn-block" href="@Url.Action("AddIngredient","Recipe")">Add ingredient</a>
-
-
-        <!--<div class="container">
-            <div class="row justify-content-center">
-                <div class="btn-group btn-group-lg d-flex" role="group" aria-label="Buttons">-->
-        @*                        <button type="button" class="btn btn-secondary w-100">Name&Description</button>
-            <button type="button" class="btn btn-secondary w-100">Ingredients</button>
-            <button type="button" class="btn btn-secondary w-100">Summary</button>*@
-        <!--<input type="submit" value="Save" class="btn btn-primary  text-center btn-block" />
-                    <a class="btn btn-primary btn-lg text-center btn-primary" href="Url.Action("AddIngredient","Recipe")">Add ingredient</a>
-                    <button type="button" class="btn btn-secondary w-100">Create Recipe</button>
-                </div>
-            </div>
-        </div>-->
-
         <div class="row text-center justify-content-md-center">
             <div class="col">
                 <input id="new-board-btn" type="submit" value="Save" class="btn btn-primary text-center btn-lg w-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save Name&Description" />
