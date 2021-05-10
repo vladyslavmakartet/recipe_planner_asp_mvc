@@ -35,7 +35,12 @@
                         <button type="submit" name="Load" class="btn btn-outline-primary dropdown-toggle w-100" id="dropdownMenuButtonLoad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Load</button>
                         <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButtonLoad">
                             <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 0})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the server">Load</a>
-                            <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 1})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the computer">Load As</a>
+                        
+                        <form asp-controller="Recipe" asp-action="LoadAs" method="post" enctype="multipart/form-data" >  
+          
+                            <input class="dropdown-item text-center" type="file" name="file" accept=".json"/>  
+                            <button type="submit" class="dropdown-item text-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the computer (if not chosen, load default from the server)">Load As Chosen File</button>  
+                        </form> 
                         </div>
                     </div>
                     <div class="btn-group w-100 d-flex" role="group">
@@ -46,9 +51,6 @@
                         </div>
                     </div>
 
-
-
-                    @*<button type="submit" name="valueToEdit" class="btn btn-outline-primary">Save</button>*@
                     <a asp-controller="Recipe" asp-action="ShoppingList" class="btn btn-outline-primary w-100">Shopping list</a>
                         
                 </div>
@@ -85,7 +87,7 @@
                                                 <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                             </svg> View
                                         </a>*@
-                                                    @using (Html.BeginForm("ActionOnRecipe", "Recipe", new { id = @i }))@*/////////TYT*@
+                                                    @using (Html.BeginForm("ActionOnRecipe", "Recipe", new { id = @i }))
                                                     {
                                                         <div class="btn-group d-flex w-50" role="group" aria-label="Action Buttons">
 

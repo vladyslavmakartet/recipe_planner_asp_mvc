@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Web;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 using recipe_planner_web.Models;
 
 
@@ -240,10 +242,20 @@ namespace recipe_planner_web.Controllers
         }
         public IActionResult Save(int id)
         {
-            if (id == 0)
-            {
+            if (RecipesList.Count != 0) {
                 var json = JsonConvert.SerializeObject(RecipesList, Formatting.Indented);
-                System.IO.File.WriteAllText("Recipes.json", json);
+                if (id == 0)
+                {
+                    System.IO.Directory.CreateDirectory("RecipesDataLocal/");
+                    System.IO.File.WriteAllText("RecipesDataLocal/Recipes.json", json);
+                }
+                if (id == 1)
+                {
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(json);
+                    var output = new FileContentResult(bytes, "application/octet-stream");
+                    output.FileDownloadName = "Recipes.json";
+                    return output;
+                }
             }
             return RedirectToAction("Index", "Recipe");
         }
@@ -252,9 +264,29 @@ namespace recipe_planner_web.Controllers
         {
             if (id == 0)
             {
-                if(System.IO.File.Exists("Recipes.json"))
-                    RecipesList = JsonConvert.DeserializeObject<List<Recipe>>(System.IO.File.ReadAllText("Recipes.json"));
+                if(System.IO.File.Exists("RecipesDataLocal/Recipes.json"))
+                    RecipesList = JsonConvert.DeserializeObject<List<Recipe>>(System.IO.File.ReadAllText("RecipesDataLocal/Recipes.json"));
             }
+            return RedirectToAction("Index", "Recipe");
+        }
+        public IActionResult LoadAS(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return RedirectToAction("Load", "Recipe");
+            System.IO.Directory.CreateDirectory("wwwroot/RecipesDataUploaded/");
+            var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/RecipesDataUploaded",
+                        "Recipes.json");//file.FileName); // replace if want to keep original file name and not to override Recipes.json
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyToAsync(stream);
+            }
+            if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/RecipesDataUploaded", "Recipes.json")))//file.FileName)))
+                RecipesList = JsonConvert.DeserializeObject<List<Recipe>>(System.IO.File.ReadAllText(Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/RecipesDataUploaded",
+                        "Recipes.json")));//file.FileName); // replace if want to keep original file name and not to override Recipes.json
+
             return RedirectToAction("Index", "Recipe");
         }
     }

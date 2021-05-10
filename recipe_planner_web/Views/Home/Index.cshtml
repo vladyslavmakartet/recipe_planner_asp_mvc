@@ -10,11 +10,18 @@
 
 
                 <a asp-controller="Recipe" asp-action="Index" class="btn btn-primary">Create Recipes</a>
-                <div class="btn-group btn-group-lg  d-flex" role="group">
+                <div class="btn-group btn-group-lg  d-flex dropright" role="group">
                     <button type="submit" name="Load" class="btn btn-primary dropdown-toggle w-100" id="dropdownMenuButtonLoad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Load Recipes</button>
-                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButtonLoad">
-                        <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 0})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the server">Load</a>
-                        <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 1})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the computer">Load As</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonLoad">
+                        <a class="dropdown-item " href="@Url.Action("Load","Recipe", new {id = 0})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the server">Load</a>
+
+                        <form asp-controller="Recipe" asp-action="LoadAs" method="post" enctype="multipart/form-data" >  
+          
+                            <input type="file" name="file" accept=".json" />  
+                            <button type="submit" class="dropdown-item " data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the computer (if not chosen, load default from the server)">Load As Chosen File</button>  
+                        </form> 
+
+
                     </div>
                 </div>
 

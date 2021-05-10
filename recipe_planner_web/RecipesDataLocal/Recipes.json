@@ -1,0 +1,18 @@
+[
+  {
+    "Ingredients": [
+      {
+        "Name": "Milk",
+        "Quantity": 1.0,
+        "Unit": "Litr"
+      },
+      {
+        "Name": "Sugar",
+        "Quantity": 0.5,
+        "Unit": "table spoon"
+      }
+    ],
+    "Name": "Ice cream",
+    "Description": "mix milk and sugar "
+  }
+]
