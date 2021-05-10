@@ -89,3 +89,10 @@ header a:hover {
 /*    min-width: 50px;*/
     min-height: 60px;
 }
+.btn-group.special {
+    display: flex;
+}
+
+.special .btn {
+    flex: 1
+}

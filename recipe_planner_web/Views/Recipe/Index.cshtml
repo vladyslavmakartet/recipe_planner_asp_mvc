@@ -29,43 +29,62 @@
 
 
                 <div class="btn-group d-flex w-100" role="group" aria-label="Action Buttons">
-                    <button type="submit" name="valueToView" class="btn btn-outline-primary">Load</button>
-                    <button type="submit" name="valueToEdit" class="btn btn-outline-primary">Save</button>
-                    <a asp-controller="Recipe" asp-action="ShoppingList" class="btn btn-outline-primary">Shopping list</a>
+
+
+                    <div class="btn-group w-100 d-flex" role="group">
+                        <button type="submit" name="Load" class="btn btn-outline-primary dropdown-toggle w-100" id="dropdownMenuButtonLoad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Load</button>
+                        <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButtonLoad">
+                            <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 0})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the server">Load</a>
+                            <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 1})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the computer">Load As</a>
+                        </div>
+                    </div>
+                    <div class="btn-group w-100 d-flex" role="group">
+                        <button type="submit" name="Save" class="btn btn-outline-primary dropdown-toggle w-100" id="dropdownMenuButtonSave" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Save</button>
+                        <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButtonSave">
+                            <a class="dropdown-item text-center" href="@Url.Action("Save","Recipe", new {id = 0})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save file to the server">Save</a>
+                            <a class="dropdown-item text-center" href="@Url.Action("Save","Recipe", new {id = 1})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save file to the computer">Save As</a>
+                        </div>
+                    </div>
+
+
+
+                    @*<button type="submit" name="valueToEdit" class="btn btn-outline-primary">Save</button>*@
+                    <a asp-controller="Recipe" asp-action="ShoppingList" class="btn btn-outline-primary w-100">Shopping list</a>
+                        
                 </div>
 
 
 
-                <hr />
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-center">#</th>
-                            <th scope="col" class="text-center">Name</th>
-                            <th scope="col" class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            if (RecipesList.Count != 0)
-                            {
-                                //using (Html.BeginForm("ActionOnRecipe", "Recipe", new { id = @i })))
-                                //{
-                                for (int i = 0; i < RecipesList.Count; i++)
+                    <hr />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">#</th>
+                                <th scope="col" class="text-center">Name</th>
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (RecipesList.Count != 0)
                                 {
-                                    <tr class="text-center">
-                                        <th class="text-center" scope="row">@(i + 1)</th>
-                                        <td>@RecipesList[i].recipe_name</td>
-                                        <td>
+                                    //using (Html.BeginForm("ActionOnRecipe", "Recipe", new { id = @i })))
+                                    //{
+                                    for (int i = 0; i < RecipesList.Count; i++)
+                                    {
+                                        <tr class="text-center">
+                                            <th class="text-center" scope="row">@(i + 1)</th>
+                                            <td>@RecipesList[i].Name</td>
+                                            <td>
 
-                                            <div class="row justify-content-center">
+                                                <div class="row justify-content-center">
 
                                                     @*                                            <a class="btn btn-primary" href=@Html.Raw(@Url.Action("ActionOnRecipe", "Recipe", new { Id = @i, action = "valueToView" }))>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                                            </svg> View
-                                                        </a>*@
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                            </svg> View
+                                        </a>*@
                                                     @using (Html.BeginForm("ActionOnRecipe", "Recipe", new { id = @i }))@*/////////TYT*@
                                                     {
                                                         <div class="btn-group d-flex w-50" role="group" aria-label="Action Buttons">
@@ -78,10 +97,10 @@
                                                             </button>
 
                                                             @*                                            <a class="btn btn-primary" href=@Html.Raw(@Url.Action("ActionOnRecipe", "Recipe", new { Id = @i, action = "valueToEdit" }))>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
-                                                                    </svg> Edit
-                                                                </a>*@
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                                                    </svg> Edit
+                                                </a>*@
 
                                                             <button type="submit" name="valueToEdit" value="@i" class="btn btn-primary">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
@@ -91,10 +110,10 @@
 
 
                                                             @*                                            <a class="btn btn-danger" href=@Html.Raw(@Url.Action("ActionOnRecipe", "Recipe", new { Id = @i, action = "valueToBeDeleted" }))>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                                    </svg> Delete
-                                                                </a>*@
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                    </svg> Delete
+                                                </a>*@
                                                             <button type="submit" name="valueToBeDeleted" value="@i" class="btn btn-danger">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
@@ -102,22 +121,21 @@
                                                             </button>
                                                         </div>
                                                     }
-                                            </div>
+                                                </div>
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    }
+                                    //}
                                 }
-                                //}
+
                             }
 
-                        }
-
-                    </tbody>
-                </table>
-                <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Create","Recipe")">Add Recipe</a>
-                <br />
-            </div>
-            //<a class="btn btn-primary btn-lg text-center" href="@Url.Action("Create","Recipe")">Create Recipe</a>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Create","Recipe")">Add Recipe</a>
+                    <br />
+                </div>
         }
 
     }

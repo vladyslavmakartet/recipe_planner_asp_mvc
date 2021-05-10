@@ -9,7 +9,6 @@
 
 <div class="container">
     <h1>Add ingredients</h1>
-    @*<h4>Recipe</h4>*@
     <hr />
     @using (Html.BeginForm("CreateIngredient", "Recipe"))
     {
@@ -37,96 +36,54 @@
 
                     </div>
                 </div>
-                <!--<div class="col ">
-                    <label class="control-label">Action</label>
-                    <div class="form-group">-->
-                @*                        <div class="btn-group" role="group" aria-label="Basic example">*@
-                @*                            <button type="submit" class="btn btn-primary btn-sm" name="valueToAdd">Add</button>*@
-                <!--<button type="submit" class="btn btn-danger  btn-block " name="valueToRemove">Remove</button>
-                    </div>
-                </div>-->
             </div>
-            @*            </div>*@
-            @*<a class="btn btn-primary  text-center btn-block" href="@Url.Action("AddIngredient","Recipe")">Add ingredient</a>*@
             <input type="submit" value="Add" class="btn btn-primary  text-center btn-block" />
 
         </div>
     }
 
     <br>
-    @*<div class="container">*@
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">Name</th>
-                    <th scope="col" class="text-center">Quantity</th>
-                    <th scope="col" class="text-center">Unit</th>
-                    <th scope="col" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    if (ingredientsList.Count != 0)
+    <table class="table caption-bottom">
+        <caption class="text-center">Added ingredients</caption>
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Quantity</th>
+                <th scope="col" class="text-center">Unit</th>
+                <th scope="col" class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (ingredientsList.Count != 0)
+                {
+
+                    for (int i = 0; i < ingredientsList.Count; i++)
                     {
-                        @*                        foreach (var item in ingredientsList)
+                        <tr class="text-center">
+                            <th class="text-center" scope="row">@(i+1)</th>
+                            <td>@ingredientsList[i].Name</td>
+                            <td>@ingredientsList[i].Quantity</td>
+                            <td>@ingredientsList[i].Unit</td>
+                            @using (Html.BeginForm("DeleteIngredientFromList", "Recipe"))
                             {
-                                <tr class="text-center">
-                                    <th class="text-center" scope="row"></th>
-                                    <td>@item.Name</td>
-                                    <td>@item.Quantity</td>
-                                    <td>@item.Unit</td>
-                                    <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-                                </tr>
-                            }*@
-
-                        for (int i = 0; i < ingredientsList.Count; i++)
-                        {
-                            <tr class="text-center">
-                                <th class="text-center" scope="row">@(i+1)</th>
-                                <td>@ingredientsList[i].Name</td>
-                                <td>@ingredientsList[i].Quantity</td>
-                                <td>@ingredientsList[i].Unit</td>
-                                @using (Html.BeginForm("DeleteIngredientFromList", "Recipe"))
-                                {
-                                    <td align="center"><button type="submit" class="btn btn-danger text-center" name="valueToDelete" value="@i"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                                                                </svg> Remove</button></td>
-                                }
-                            </tr>
-                        }
-
-
-
-
-
+                                <td align="center">
+                                    <button type="submit" class="btn btn-danger text-center" name="valueToDelete" value="@i">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg> Remove
+                                    </button>
+                                </td>
+                            }
+                        </tr>
                     }
-
                 }
-                @*<tr class="text-center">
-                        <th class="text-center" scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-                    </tr>
-                    <tr class="text-center">
-                        <th class="text-center" scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-                    </tr>
-                    <tr class="text-center">
-                        <th class="text-center" scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>twitter</td>
-                        <td align="center"><button type="button" class="btn btn-danger text-center" value="Remove">Remove</button></td>
-                    </tr>*@
-            </tbody>
-        </table>
-    @*</div>*@
+
+            }
+        </tbody>
+    </table>
+
 
 
 

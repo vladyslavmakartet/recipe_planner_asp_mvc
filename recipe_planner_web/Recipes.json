@@ -1,0 +1,28 @@
+[
+  {
+    "Ingredients": [
+      {
+        "Name": "Milk",
+        "Quantity": 1.0,
+        "Unit": "Litrs"
+      },
+      {
+        "Name": "Meat",
+        "Quantity": 25.0,
+        "Unit": "KG"
+      },
+      {
+        "Name": "INGREDIENT 1",
+        "Quantity": 0.03,
+        "Unit": "Litrs"
+      },
+      {
+        "Name": "awd",
+        "Quantity": 0.05,
+        "Unit": "b"
+      }
+    ],
+    "Name": "new super duper recipe example",
+    "Description": "new super duper recipe example Description\r\nnew super duper recipe example                  new super duper recipe example\r\nnew super duper recipe example\r\n\r\nnew super duper recipe example"
+  }
+]

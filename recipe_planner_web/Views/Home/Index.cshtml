@@ -1,14 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="wrapper">
+
+<div class="container">
     <div class="text-center">
         <h1 class="display-4">Welcome</h1>
-        <!--<button asp-area="" asp-controller="Recipe" asp-action="Create" type="button" class="btn btn-primary btn-lg text-center">Create Recipe</button>-->
+        <div class="text-center">
+            <div class="btn-group btn-group-lg" role="group" aria-label="Action Buttons">
 
 
-        <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Create Recipe</a>
-        <a class="btn btn-primary btn-lg text-center" href="@Url.Action("Index","Recipe")">Load Recipes</a>
+                <a asp-controller="Recipe" asp-action="Index" class="btn btn-primary">Create Recipes</a>
+                <div class="btn-group btn-group-lg  d-flex" role="group">
+                    <button type="submit" name="Load" class="btn btn-primary dropdown-toggle w-100" id="dropdownMenuButtonLoad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Load Recipes</button>
+                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButtonLoad">
+                        <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 0})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the server">Load</a>
+                        <a class="dropdown-item text-center" href="@Url.Action("Load","Recipe", new {id = 1})" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Load file from the computer">Load As</a>
+                    </div>
+                </div>
 
+
+            </div>
+
+            </div>
+
+
+
+
+
+
+        </div>
     </div>
-</div>

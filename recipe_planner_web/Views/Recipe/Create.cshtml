@@ -45,7 +45,7 @@
         //<form asp-action="Create" class="was-validated">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="recipe_name" class="control-label">Name</label>
+            <label asp-for="Name" class="control-label">Name</label>
             @{
                 if (!String.IsNullOrEmpty(recipeName))
                 {
@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="recipe_description" class="control-label">Description</label>
+            <label asp-for="Description" class="control-label">Description</label>
             @{
                 if (!String.IsNullOrEmpty(recipeDescription))
                 {
@@ -176,7 +176,8 @@
         <br />
 
 
-        <table class="table">
+        <table class="table caption-bottom">
+            <caption class="text-center">Ingredients</caption>
             <thead>
                 <tr>
                     <th scope="col" class="text-center">#</th>
