@@ -13,11 +13,6 @@ namespace recipe_planner_web.Models
 
         public List<Ingredient> Ingredients = new List<Ingredient>();
 
-        public List<Ingredient> GetIngredientList()
-        {
-            return Ingredients;
-        }
-
         public Recipe() { }
         public Recipe(string name, string description, List<Ingredient> newIngredients)
         {
